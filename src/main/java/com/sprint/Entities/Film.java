@@ -6,8 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "film")
@@ -75,16 +76,23 @@ public class Film {
     @Column(name = "special_features", columnDefinition = "VARCHAR(100)")
     private String specialFeatures;
 
-    @NotNull(message = "Last update is required")
     @Column(name = "last_update")
     private Timestamp lastUpdate;
-
-    @OneToMany(mappedBy = "film")
-    private List<Inventory> inventories;
-
-    @OneToMany(mappedBy = "film")
-    private List<FilmActor> filmActors;
-
-    @OneToMany(mappedBy = "film")
-    private List<FilmCategory> filmCategories;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "film_actor",
+        joinColumns = @JoinColumn(name = "film_id"),
+        inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actors = new ArrayList<>();
+    
+   
+    @ManyToMany
+    @JoinTable(
+        name = "film_category",
+        joinColumns = @JoinColumn(name = "film_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories = new ArrayList<>();
 }

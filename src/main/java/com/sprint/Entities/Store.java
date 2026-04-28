@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "store")
 @Data
@@ -30,12 +32,15 @@ public class Store {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "store")
     private List<Inventory> inventories;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "store")
     private List<Staff> staffList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "store")
     private List<Customer> customers;
 }

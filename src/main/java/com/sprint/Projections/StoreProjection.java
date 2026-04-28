@@ -1,29 +1,35 @@
 package com.sprint.Projections;
 
+import java.sql.Timestamp;
+
 import org.springframework.data.rest.core.config.Projection;
 
-import com.sprint.Entities.Address;
-import com.sprint.Entities.Staff;
 import com.sprint.Entities.Store;
 
-@Projection(name = "storeProjection", types = { Store.class })
+@Projection(name = "storeProjection", types = Store.class)
 public interface StoreProjection {
+
     Long getStoreId();
+    Timestamp getLastUpdate();
 
-    Staff getManagerStaff();   
-    
-    Address getAddress();
-    
-    default String getManagerName() {
-        return getManagerStaff().getFirstName() 
-             + " " + getManagerStaff().getLastName();
+    AddressView getAddress();
+    StaffView getManagerStaff();
+
+    interface AddressView {
+        Long getAddressId();
+        String getAddress();
+        String getDistrict();
+
+        CityView getCity();
+
+        interface CityView {
+            String getCity();
+        }
     }
 
-    default Long getAddressId() {
-        return getAddress().getAddressId();
-    }
-    
-    default Long getManagerStaffId() {
-        return getManagerStaff().getStaffId();
+    interface StaffView {
+        Long getStaffId();
+        String getFirstName();
+        String getLastName();
     }
 }
