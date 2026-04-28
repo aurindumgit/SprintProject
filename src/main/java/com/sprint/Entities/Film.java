@@ -95,4 +95,10 @@ public class Film {
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories = new ArrayList<>();
+    
+    @PrePersist
+    @PreUpdate
+    public void setLastUpdate() {
+        this.lastUpdate = new Timestamp(System.currentTimeMillis());
+    }
 }
