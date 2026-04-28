@@ -5,7 +5,7 @@ import com.sprint.Entities.Customer;
 
 import java.time.LocalDate;
 import java.sql.Timestamp;
-import java.util.List;
+// import java.util.List;
 
 @Projection(name = "customerDetail", types = Customer.class)
 public interface CustomerProjection {
