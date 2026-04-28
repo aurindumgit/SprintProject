@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "films", path = "films", excerptProjection = FilmLanguageProjection.class)
-public interface FilmRepository extends JpaRepository<Film, Long> {
+public interface FilmLanguageRepository extends JpaRepository<Film, Long> {
     
     List<Film> findByLanguage_LanguageId(Long languageId);
     
