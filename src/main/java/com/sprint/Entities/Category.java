@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "category")
 @Data
@@ -25,6 +27,7 @@ public class Category {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<FilmCategory> filmCategories;
 }

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "language")
 @Data
@@ -29,9 +31,11 @@ public class Language {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "language")
     private List<Film> films;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "originalLanguage")
     private List<Film> originalLanguageFilms;
 }

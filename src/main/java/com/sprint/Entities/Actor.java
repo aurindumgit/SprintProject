@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "actor")
 @Data
@@ -27,7 +29,8 @@ public class Actor {
     
     @Column(name = "last_update")
     private Timestamp lastUpdate;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "actor")
     private List<FilmActor> filmActors;
 }
