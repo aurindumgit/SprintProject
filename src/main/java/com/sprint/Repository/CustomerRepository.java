@@ -5,7 +5,7 @@ import com.sprint.Entities.Customer;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;          
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -27,10 +27,12 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     void delete(Customer entity);
 
     List<Customer> findByFirstNameAndLastName(
-        @Param("firstName") @NotBlank String firstName,
-        @Param("lastName") @NotBlank String lastName);
+            @Param("firstName") @NotBlank String firstName,
+            @Param("lastName") @NotBlank String lastName);
 
     Optional<Customer> findByEmail(@Param("email") String email);
 
     Page<Customer> findByActive(@Param("active") Boolean active, Pageable pageable);
+
+   List<Customer> findByAddress_City_CityIgnoreCase(String city);
 }
