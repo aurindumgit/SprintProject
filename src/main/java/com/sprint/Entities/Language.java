@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "language")
 @Data
@@ -23,10 +25,12 @@ public class Language {
     @NotBlank(message = "Language name is required")
     @Size(min = 1, max = 20, message = "Language name must be between 1 and 20 characters")
     @Column(name = "name", length = 20, nullable = false)
+    @JsonProperty("name")
     private String name;
 
     @NotNull(message = "Last update is required")
     @Column(name = "last_update")
+    @JsonProperty("lastUpdate")
     private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "language")
